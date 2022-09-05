@@ -1,0 +1,11 @@
+.row
+  - @report_news.each do |report_new|
+    .col-md-6  
+      div.p-4.bg-white.w-75.mx-auto.my-4
+        img.img-fluid src="https://media.istockphoto.com/photos/shot-of-a-handsome-young-man-standing-against-a-grey-background-picture-id1335941248?b=1&k=20&m=1335941248&s=170667a&w=0&h=sn_An6VRQBtK3BuHnG1w9UmhTzwTqM3xLnKcqLW-mzw="
+        div.d-flex.mt-3
+          i.h3.me-2.fa-regular.fa-heart
+          h5 = report_new.report_new_likes.count + 12
+          p.text-muted.flex-grow-1.text-end = "2" + (DateTime.now - report_new.created_at.to_date).to_i.to_s + " dias"
+        p.fw-lighter = report_new.description
+
