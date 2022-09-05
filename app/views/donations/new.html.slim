@@ -3,7 +3,7 @@
   = simple_form_for(@donation) do |f|
     = f.input :amount, :collection => AMOUNTS
     = f.input :amount
-    = f.input :payment_type, :collection => ["Catão de crédio - Mensal", "Cartão de crédito - Único", "Pix - Único"]
+    = f.input :payment_type, :collection => TYPES
 
 
     = f.submit
