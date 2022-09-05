@@ -1,0 +1,12 @@
+class CreateUserDepositions < ActiveRecord::Migration[7.0]
+  def change
+    create_table :user_depositions do |t|
+      t.string :description, null: false
+      t.boolean :hide_name, null: false, default: false
+      t.boolean :active, null: false, default: false
+      t.references :user, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
