@@ -7,7 +7,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :donations, only: %i[new create]
-  resources :donations, only: %i[new create make_your_donation]
   resources :donations, only: %i[new create make_your_donation]
 end

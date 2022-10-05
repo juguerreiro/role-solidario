@@ -1,0 +1,31 @@
+.div.container
+  = image_tag "charity.jpeg", class: "img-thumbnail"
+  p Escolha a melhor opção para você
+
+  = simple_form_for(@donation) do |f|
+    -Donation::AMOUNTS.each do |amount|
+      .form-check.form-check-inline
+        input#inlineRadio1.form-check-input[type="radio" name="inlineRadioOptions" value="option1"]
+        label.form-check-label[for="inlineRadio1"]
+          = amount
+    = f.input :amount_options, collection: Donation::AMOUNTS, as: :check_boxes, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item', type: "radio"
+    .div.border-end
+    = f.input :amount, label: "Escolha uma quantia diferente:"
+    = f.input :payment_type, collection: Donation::TYPES
+    = hidden_field_tag :user_id, current_user
+
+    = f.submit
+
+
+| <! -- comment -->
+
+
+input#success-outlined.btn-check[type="radio" name="options-outlined"  checked]
+label.btn.btn-outline-success[for="success-outlined"]
+  | Checked success radio
+input#danger-outlined.btn-check[type="radio" name="options-outlined" ]
+label.btn.btn-outline-danger[for="danger-outlined"]
+  | Danger radio
+input#warning-outlined.btn-check[type="radio" name="options-outlined" ]
+label.btn.btn-outline-warning[for="warning-outlined"]
+  | Danger aradio

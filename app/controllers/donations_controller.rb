@@ -8,16 +8,13 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params)
     @donation.user = current_user
-    raise
+    @donation.amount = params[:donation][:amount_options].join.to_i if params[:donation][:amount].empty?
+
     if @donation.save
       redirect_to root_path, notice: "Obrigado pela sua doação"
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def make_your_donation
-
   end
 
   private

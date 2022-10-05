@@ -1,9 +1,0 @@
-.div.container
-  p Escolha a melhor opção para você
-  = simple_form_for(@donation) do |f|
-    = f.input :amount, :collection => AMOUNTS
-    = f.input :amount
-    = f.input :payment_type, :collection => TYPES
-
-
-    = f.submit
