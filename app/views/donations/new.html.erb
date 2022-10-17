@@ -1,0 +1,66 @@
+<div class="container">
+  <%= simple_form_for @donation do |f|  %>
+    <%= f.input :amount_options,
+                collection: Donation::AMOUNTS,
+                as: :check_boxes,
+                input_html: { class: "tag-selector" },
+                item_wrapper_class: 'tag-item',
+                label: "Escolha um valor" %>
+    <%= f.input :amount,
+                label: "Digite um valor"%>
+    <%= f.input :payment_type,
+                collection: Donation::TYPES,
+                label: "Escolha um tipo de pagamento",
+                id:"payment_type" %>
+    <%= f.input :monthly,
+                as: :boolean,
+                label: "Gostaria de contribuir mensalmente?" %>
+
+    <!-- Button trigger modal -->
+    <button id="donation_button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <p>Doe</p>
+    </button>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Resumo da doação</h5>
+            <%= link_to new_donation_path do %>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <% end %>
+          </div>
+          <div class="modal-body">
+            <h6 id="modal-amount">Valor:</h6>
+            <h6 id="modal-type">Tipo:</h6>
+          </div>
+          <div class="modal-footer">
+          <%= link_to new_donation_path do %>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retornar</button>
+          <% end %>
+            <button type="button" class="btn">
+              <%= f.submit class: "doar", label: "Doe já" %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+<script>
+  document.getElementById("donation_button").addEventListener("click", myFunction);
+
+  function myFunction() {
+    const selected = document.querySelector(".tag-selector:checked")
+    if (selected != null && selected.value != "") {
+      document.getElementById("modal-amount").innerText = 'Valor: R$ ' + document.querySelector(".tag-selector:checked").value;
+    } else {
+      document.getElementById("modal-amount").innerText = 'Valor: R$ ' + document.getElementById("donation_amount").value;
+    }
+    document.getElementById("modal-type").innerText = 'Tipo: ' + document.getElementById("donation_payment_type").value;
+  }
+</script>

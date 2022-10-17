@@ -1,9 +1,0 @@
-.div.container
-  p Escolha a melhor opção para você
-  = simple_form_for(@donation) do |f|
-    = f.input :amount, :collection => [10, 20, 30, 40, 50, 60]
-    = f.input :amount
-    = f.input :payment_type, :collection => ["Catão de crédio - Mensal", "Cartão de crédito - Único", "Pix - Único"]
-
-
-    = f.submit
