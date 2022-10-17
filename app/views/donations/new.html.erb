@@ -28,17 +28,20 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Resumo da doação</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <%= link_to new_donation_path do %>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <% end %>
           </div>
           <div class="modal-body">
-            <h6>Mensal:</h6>
             <h6 id="modal-amount">Valor:</h6>
             <h6 id="modal-type">Tipo:</h6>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= link_to new_donation_path do %>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retornar</button>
+          <% end %>
             <button type="button" class="btn">
-              <%= f.submit label: "Doe já" %>
+              <%= f.submit class: "doar", label: "Doe já" %>
             </button>
           </div>
         </div>
@@ -52,7 +55,12 @@
   document.getElementById("donation_button").addEventListener("click", myFunction);
 
   function myFunction() {
-    document.getElementById("modal-amount").innerText = 'Valor: ' + document.getElementById("donation_amount").value ;
-    document.getElementById("modal-type").innerText = 'Tipo: ' + document.getElementById("donation_payment_type").value ;
+    const selected = document.querySelector(".tag-selector:checked")
+    if (selected != null && selected.value != "") {
+      document.getElementById("modal-amount").innerText = 'Valor: R$ ' + document.querySelector(".tag-selector:checked").value;
+    } else {
+      document.getElementById("modal-amount").innerText = 'Valor: R$ ' + document.getElementById("donation_amount").value;
+    }
+    document.getElementById("modal-type").innerText = 'Tipo: ' + document.getElementById("donation_payment_type").value;
   }
 </script>
